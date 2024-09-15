@@ -1,4 +1,4 @@
-<div class="bg-secondary">結果一覧</div>
-<% @results.each do |result| %>
-  <%= result.score %>
-<% end %>
+<div class="text-6xl" id="number_field">1</div>
+<button class="btn btn-lg" id="submit_button">送信</button>
+
+<%= javascript_include_tag "index.js", "data-turbo-track": "reload", type: "module" %>
