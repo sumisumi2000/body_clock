@@ -10,6 +10,6 @@
 
 20.times do |n|
   Result.create!(
-    score: n
+    score: n * 2
     )
 end
