@@ -1,4 +1,4 @@
 <div class="text-6xl" id="number_field">1</div>
-<button class="btn btn-lg" id="submit_button">送信</button>
+<%= link_to 'スタート', new_scoring_path, class: "btn btn-lg", id: "start_button", data: { turbo_stream: true } %>
 
 <%= javascript_include_tag "index.js", "data-turbo-track": "reload", type: "module" %>

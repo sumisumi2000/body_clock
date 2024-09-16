@@ -1,26 +1,44 @@
 document.addEventListener("turbo:load", () => {
-  // ストップウォッチ部分を取得
-  const stop_watch = document.getElementById("number_field");
+  // スタートボタンを取得
+  let start_btn = document.getElementById("start_button");
 
-  // ストップウォッチの時間を加算する関数
-  let addNumber = function () {
-    stop_watch.innerHTML = (parseFloat(stop_watch.textContent) + 0.01).toFixed(
-      2
-    );
-  };
-
-  // 関数をセット
-  const timer = setInterval(addNumber, 5);
-
-  // ストップボタンを取得
-  let stop_btn = document.getElementById("submit_button");
-
-  // ストップボタンがクリックされた時、タイマーストップ
-  stop_btn.addEventListener(
+  // スタートボタンがクリックされた時、タイマースタート
+  start_btn.addEventListener(
     "click",
     function () {
-      console.log("クリックされました！");
-      clearInterval(timer);
+      // ストップウォッチ部分を取得
+      const stop_watch = document.getElementById("number_field");
+      // ストップウォッチの時間を加算する関数
+      let addNumber = function () {
+        stop_watch.innerHTML = (
+          parseFloat(stop_watch.textContent) + 0.01
+        ).toFixed(2);
+      };
+      // タイマーに関数をセット
+      const timer = setInterval(addNumber, 5);
+
+      // DOMの変更を監視するためにMutationObserverを設定
+      const observer = new MutationObserver((mutationsList, observer) => {
+        // ストップボタンを取得
+        const stop_btn = document.getElementById("stop_button");
+        // ストップボタンにクリックイベントを追加
+        stop_btn.addEventListener(
+          "click",
+          function () {
+            // タイマーストップ
+            stop_btn.href = `scorings/${stop_watch.textContent}`;
+            clearInterval(timer);
+          },
+          false
+        );
+        // 監視を終了
+        observer.disconnect();
+      });
+
+      // スタートボタンが消えてストップボタンが出現する要素を監視
+      observer.observe(document.body, {
+        childList: true,
+      });
     },
     false
   );
