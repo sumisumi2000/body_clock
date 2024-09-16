@@ -11,4 +11,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "results#index"
+
+  resources :scorings, only: %i[new show], param: :time, constraints: { time:  /[0-9]+(\.[0-9]+)?/ }
 end
