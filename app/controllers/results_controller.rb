@@ -1,5 +1,3 @@
 class ResultsController < ApplicationController
-  def index
-    @results = Result.all
-  end
+  def index; end
 end
